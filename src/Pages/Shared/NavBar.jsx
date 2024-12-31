@@ -37,7 +37,9 @@ const NavBar = () => {
                 <NavLink to="menu" className="uppercase font-semibold">
                   Our Menu
                 </NavLink>
-                <NavLink className="uppercase font-semibold">Our Shop</NavLink>
+                <NavLink to="shop/salad" className="uppercase font-semibold">
+                  Our Shop
+                </NavLink>
               </div>
             </ul>
           </div>
@@ -69,7 +71,9 @@ const NavBar = () => {
               <NavLink to="menu" className="uppercase">
                 Our Menu
               </NavLink>
-              <NavLink className="uppercase">Our Shop</NavLink>
+              <NavLink to="shop/salad" className="uppercase">
+                Our Shop
+              </NavLink>
               <h1 className="p-2 relative bg-green-700 rounded-full">
                 <BsCart4 className="text-2xl" />
                 <span className="rounded-full w-5 h-5 flex justify-center items-center top-5 bottom-0 right-0  bg-red-800 absolute">

@@ -27,6 +27,9 @@ const NavBar = () => {
               className="menu w-[250px]  menu-sm dropdown-content bg-black text-white rounded-box z-[1] mt-3  p-2 shadow"
             >
               <div className=" flex flex-col gap-3 p-6 text-white">
+                <NavLink className="uppercase font-semibold" to="login">
+                  Login
+                </NavLink>
                 <NavLink className="uppercase font-semibold border-b py-2">
                   Home
                 </NavLink>
@@ -90,6 +93,7 @@ const NavBar = () => {
                   alt=""
                 />
               </div>
+              <NavLink to="login">Login</NavLink>
             </div>
           </div>
         </div>

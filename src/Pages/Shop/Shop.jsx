@@ -22,7 +22,7 @@ const Shop = () => {
   return (
     <>
       <Helmet>
-        <title>Our Menu</title>
+        <title>Our Shop</title>
       </Helmet>
       <div>
         <Cover
@@ -35,8 +35,8 @@ const Shop = () => {
             defaultIndex={tabIndex}
             onSelect={(index) => setTabIndex(index)}
           >
-            <div className="flex justify-center items-center">
-              <TabList>
+            <div className="flex justify-center items-center ">
+              <TabList className={` border-none  mb-8`}>
                 <Tab>Salad</Tab>
                 <Tab>pizza</Tab>
                 <Tab>soup</Tab>

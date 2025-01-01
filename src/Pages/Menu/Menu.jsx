@@ -10,7 +10,7 @@ import Popular3 from "../Shared/Cover/Popular3";
 import Popular4 from "../Shared/Cover/Popular4";
 import Popular5 from "../Shared/Cover/Popular5";
 import Popular6 from "../Shared/Cover/Popular6";
-import { Link } from "react-router-dom";
+import Title from "../../Components/Title";
 const Menu = () => {
   return (
     <>
@@ -24,7 +24,9 @@ const Menu = () => {
           img={img}
         />
         <div className="px-6">
-          <Popular2 />
+          <div className="mt-20">
+            <Title subtitle={"---Don't miss---"} title={"TODAY'S OFFER"} />
+          </div>
           <SectionThree
             img={dimg}
             title={"DESSERTS"}
@@ -32,8 +34,9 @@ const Menu = () => {
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
           />
+          <Popular2 title={"DESSERTS"} />
           {/* desert end */}
-          <Popular3 />
+
           <SectionThree
             img={pimg}
             title={"PIZZA"}
@@ -41,8 +44,9 @@ const Menu = () => {
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
           />
+          <Popular3 title={"PIZZA"} />
           {/* Pizza end */}
-          <Popular4 />
+
           <SectionThree
             img={mimg}
             title={"SALAD"}
@@ -50,8 +54,9 @@ const Menu = () => {
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
           />
+          <Popular4 title={"SALAD"} />
           {/* SALADS end */}
-          <Popular5 />
+
           <SectionThree
             img={mimg}
             title={"SOUP"}
@@ -59,13 +64,9 @@ const Menu = () => {
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
           />
+          <Popular5 title={"SOUP"} />
           {/* SOUPS end */}
-          <Popular6 />
-          <div className="text-center mt-14 mb-6">
-            <button className=" font-medium btn btn-outline border-0 border-b-4 rounded-br-xl rounded-bl-xl px-4 py-2 border-black ">
-              ORDER YOUR FAVOURITE FOOD
-            </button>
-          </div>
+          <Popular6 title={"DRINKS"} />
         </div>
       </div>
     </>

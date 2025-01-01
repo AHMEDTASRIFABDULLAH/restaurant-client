@@ -1,17 +1,6 @@
-import { Link } from "react-router-dom";
-
 const SectionThree = ({ img, title, subtitle }) => {
-  const lowcaseTitle = title.toLowerCase();
-  console.log(lowcaseTitle);
   return (
     <>
-      <Link to={`/shop/${lowcaseTitle}`}>
-        <div className="text-center mt-14 sm:mt-20">
-          <button className=" font-medium btn btn-outline border-0 border-b-4 rounded-br-xl rounded-bl-xl px-4 py-2 border-black ">
-            ORDER YOUR FAVOURITE FOOD
-          </button>
-        </div>
-      </Link>
       <div
         style={{
           backgroundImage: `url(${img})`,

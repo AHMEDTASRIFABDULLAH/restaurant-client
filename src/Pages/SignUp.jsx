@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import side from "../assets/others/authentication2.png";
 import authimg from "../assets/others/authentication.png";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, updateUserProfile } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     reset,
     register,
@@ -14,8 +19,38 @@ const SignUp = () => {
   } = useForm();
   console.log(errors);
   const onSubmit = (data) => {
-    createUser(data.email, data.password);
-    reset();
+    createUser(data.email, data.password).then((result) => {
+      console.log(result.user);
+      updateUserProfile(data.name, data.photo)
+        .then(() => {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Signup success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate(from, { replace: true });
+          reset();
+        })
+        .catch((err) => console.log(err));
+    });
+  };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Signup success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div
@@ -39,7 +74,10 @@ const SignUp = () => {
             Get Your Free Account Now.
           </p>
 
-          <div className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 ">
+          <div
+            onClick={handleGoogleSignIn}
+            className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 "
+          >
             <div className="px-4 py-2">
               <svg className="w-6 h-6" viewBox="0 0 40 40">
                 <path

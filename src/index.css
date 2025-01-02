@@ -9,3 +9,6 @@ body {
 .cinzel {
   font-family: "Cinzel", "Inter", serif;
 }
+.active {
+  color: #eeff25;
+}

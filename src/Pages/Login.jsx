@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/others/authentication2.png";
 import slide from "../assets/others/authentication.png";
 import {
@@ -8,9 +8,14 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 const Login = () => {
   const captchaRef = useRef(null);
   const { loginUser } = useContext(AuthContext);
+  const [capErr, setCapErr] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -23,11 +28,21 @@ const Login = () => {
     console.log(val);
     if (validateCaptcha(val) == true) {
       console.log("captcha is working");
+    } else {
+      setCapErr("type right captch");
     }
     loginUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Login success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -112,6 +127,7 @@ const Login = () => {
                 required
               />
             </div>
+            <p className="mt-2 text-red-700">{capErr}</p>
             <div className="mt-6">
               <button
                 type="submit"

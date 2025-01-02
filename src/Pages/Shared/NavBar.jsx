@@ -3,8 +3,11 @@ import { BsCart4 } from "react-icons/bs";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
+import useCarts from "../../Hooks/useCarts";
 const NavBar = () => {
   const { logOut, user } = useContext(AuthContext);
+  const [cart] = useCarts();
+  console.log(cart);
   const handelLogOut = () => {
     logOut()
       .then(() => {
@@ -98,14 +101,14 @@ const NavBar = () => {
             {user ? (
               <></>
             ) : (
-              <NavLink className="uppercase" to="login">
+              <NavLink className="uppercase lg:hidden" to="login">
                 Login
               </NavLink>
             )}
             {user ? (
               <></>
             ) : (
-              <NavLink className="uppercase" to="signup">
+              <NavLink className="uppercase lg:hidden" to="signup">
                 SignUp
               </NavLink>
             )}
@@ -130,7 +133,7 @@ const NavBar = () => {
               <h1 className="p-2 relative bg-green-700 rounded-full">
                 <BsCart4 className="text-2xl" />
                 <span className="rounded-full w-5 h-5 flex justify-center items-center top-5 bottom-0 right-0  bg-red-800 absolute">
-                  4
+                  {cart.length}
                 </span>
               </h1>
               <div className="flex justify-center items-center gap-4">

@@ -1,10 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { axiosSec } from "../../Hooks/useAxiosSec";
+import useAxiosSec from "../../Hooks/useAxiosSec";
 import useCarts from "../../Hooks/useCarts";
+import toast from "react-hot-toast";
 
 const ShopCards = ({ item }) => {
+  const axiosSec = useAxiosSec();
   const { name, recipe, image, _id, price } = item;
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const ShopCards = ({ item }) => {
         .post("/carts", cartitem)
         .then((res) => {
           if (res.data.insertedId) {
-            Swal.fire("Add to cart success");
+            toast.success(" Food added Successfully ");
             refetch();
           }
           console.log(res);

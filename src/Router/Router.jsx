@@ -7,7 +7,10 @@ import Shop from "../Pages/Shop/Shop";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import PrivateRoute from "../Private/PrivateRoute";
-import Dashboard from "../Pages/Dashboard/Dashboard";
+import Dashboard from "../Layouts/Dashboard/Dashboard";
+import Oders from "../Layouts/Dashboard/Oders/Oders";
+import AllUsers from "../Layouts/Dashboard/Allusers/AllUsers";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -34,13 +37,23 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignUp />,
       },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
       {
-        path: "dashboard",
-        element: (
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        ),
+        path: "/dashboard/oders",
+        element: <Oders />,
+      },
+      {
+        path: "/dashboard/allusers",
+        element: <AllUsers />,
       },
     ],
   },

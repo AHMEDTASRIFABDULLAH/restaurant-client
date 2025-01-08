@@ -60,7 +60,7 @@ const NavBar = () => {
                 <NavLink to="contact" className="uppercase font-semibold">
                   CONTACT us
                 </NavLink>
-                <NavLink to="dashboard" className="uppercase font-semibold">
+                <NavLink to="/dashboard" className="uppercase font-semibold">
                   DASHBOARD
                 </NavLink>
                 <NavLink to="menu" className="uppercase font-semibold">
@@ -96,6 +96,7 @@ const NavBar = () => {
                 className="w-9 h-9 border-4 lg:hidden rounded-full mr-4"
                 src={user?.photoURL}
                 alt=""
+                referrerPolicy="no-referrer"
               />
             )}
             {user ? (
@@ -121,7 +122,7 @@ const NavBar = () => {
               <NavLink to="contact" className="uppercase">
                 CONTACT us
               </NavLink>
-              <NavLink to="dashboard" className="uppercase">
+              <NavLink to="/dashboard" className="uppercase">
                 DASHBOARD
               </NavLink>
               <NavLink to="menu" className="uppercase">

@@ -4,7 +4,7 @@ import { IoLogoInstagram } from "react-icons/io5";
 const Footer = () => {
   return (
     <div>
-      <div className=" sm:flex  text-white">
+      <div className=" sm:flex  text-white ">
         <div className="bg-[#1F2937] sm:w-1/2 p-20 space-y-6">
           <h1 className="text-xl">CONTACT US</h1>
           <div className="space-y-2 text-xs">

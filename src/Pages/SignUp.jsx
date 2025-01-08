@@ -5,7 +5,9 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const { createUser, signInWithGoogle, updateUserProfile } =
     useContext(AuthContext);
   const navigate = useNavigate();
@@ -23,6 +25,36 @@ const SignUp = () => {
       console.log(result.user);
       updateUserProfile(data.name, data.photo)
         .then(() => {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post(`/users`, userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added dataBase");
+              Swal.fire({
+                position: "top",
+                icon: "success",
+                title: "Signup success",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate(from, { replace: true });
+              reset();
+            }
+          });
+        })
+        .catch((err) => console.log(err));
+    });
+  };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle().then((result) => {
+        const userInfo = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
           Swal.fire({
             position: "top",
             icon: "success",
@@ -31,23 +63,8 @@ const SignUp = () => {
             timer: 1500,
           });
           navigate(from, { replace: true });
-          reset();
-        })
-        .catch((err) => console.log(err));
-    });
-  };
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Signup success",
-        showConfirmButton: false,
-        timer: 1500,
+        });
       });
-      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
     }

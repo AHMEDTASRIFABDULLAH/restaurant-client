@@ -10,9 +10,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../FireBase/firebase";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+const axiosPublic = useAxiosPublic();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loding, setLoding] = useState(true);
@@ -42,6 +44,18 @@ const AuthProvider = ({ children }) => {
     const unsibscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log("user ------>", currentUser);
+      const userInfo = {
+        email: currentUser?.email,
+      };
+      if (currentUser) {
+        axiosPublic.post(`/jwt`, userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("token", res.data.token);
+          }
+        });
+      } else {
+        localStorage.removeItem("token");
+      }
       setLoding(false);
     });
     return () => {

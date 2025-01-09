@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Root from "../Layouts/Root";
 import Home from "../Pages/Home";
 import Error from "../Pages/Error";
@@ -10,6 +10,7 @@ import PrivateRoute from "../Private/PrivateRoute";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import Oders from "../Layouts/Dashboard/Oders/Oders";
 import AllUsers from "../Layouts/Dashboard/Allusers/AllUsers";
+import AddItems from "../Pages/AddItems/AddItems";
 
 export const router = createBrowserRouter([
   {
@@ -51,9 +52,14 @@ export const router = createBrowserRouter([
         path: "/dashboard/oders",
         element: <Oders />,
       },
+      // admin routes
       {
-        path: "/dashboard/allusers",
+        path: "allusers",
         element: <AllUsers />,
+      },
+      {
+        path: "/dashboard/additems",
+        element: <AddItems />,
       },
     ],
   },
